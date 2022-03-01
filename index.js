@@ -1,11 +1,43 @@
 import chalk from 'chalk';
+import fs from 'fs';
 
-console.log(chalk.blue('vamos começar!'));
-
-const paragrafo = 'Texto retornado por uma função';
-
-function texto(string) {
-  return string;
+function tratarErro(erro) {
+  throw new Error(chalk.red(erro.code, 'não há arquivo no caminho.'));
 }
 
-console.log(texto(paragrafo));
+async function pegaArquivo(caminhoDoArquivo) {
+  const encoding = 'utf-8'
+  try {
+    const texto = await fs.readFileSync(caminhoDoArquivo, encoding);
+    console.log(chalk.green(texto));
+  } catch (err) {
+    console.log(chalk.red(err))
+  } finally {
+    console.log(chalk.yellow('Operação concluída!'))
+  }
+
+}
+
+// function pegaArquivo(caminhoDoArquivo) {
+//   const encoding = 'utf-8'
+//   fs.promises
+//     .readFile(caminhoDoArquivo, encoding)
+//     .then((texto) => {
+//       console.log(chalk.green(texto));
+//     })
+//     .catch((erro) => {
+//       tratarErro(erro);
+//     });
+// }
+
+// function pegaArquivo(caminhoDoArquivo) {
+//   const encoding = 'utf-8'
+//   fs.readFile(caminhoDoArquivo, encoding, (erro, texto) => {
+//     if (erro) {
+//       tratarErro(erro);
+//     }
+//     console.log(chalk.green(texto));
+//   });
+// }
+
+pegaArquivo('./arquivos/texto1.md');
