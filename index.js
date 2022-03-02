@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import fs from 'fs';
 
 function extraiLinks(texto) {
@@ -13,7 +12,7 @@ function extraiLinks(texto) {
 }
 
 function tratarErro(erro) {
-  throw new Error(chalk.red(erro.code, 'não há arquivo no caminho.'));
+  throw new Error(erro.code, 'não há arquivo no caminho.');
 }
 
 async function pegaArquivo(caminhoDoArquivo) {
@@ -22,9 +21,9 @@ async function pegaArquivo(caminhoDoArquivo) {
     const texto = await fs.readFileSync(caminhoDoArquivo, encoding);
     return extraiLinks(texto);
   } catch (err) {
-    console.log(chalk.red(err))
+    console.log(err)
   } finally {
-    console.log(chalk.yellow('Operação concluída!'))
+    console.log('Operação concluída!')
   }
 
 }
