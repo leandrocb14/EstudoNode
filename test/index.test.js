@@ -19,4 +19,9 @@ describe('pegaArquivo::', () => {
     const resultado = await pegaArquivo('./test/arquivos/texto1_semlinks.md');
     expect(resultado).toBe('não há links');
   });
+  it('deve retornar mensagem que "não há arquivo no caminho."', async () => {
+    expect(async() => {
+      await pegaArquivo();
+    }).rejects.toThrow('não há arquivo no caminho');
+  });
 })

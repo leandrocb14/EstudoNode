@@ -11,8 +11,8 @@ function extraiLinks(texto) {
   return arrayResultados.length === 0 ? 'não há links' : arrayResultados;
 }
 
-function tratarErro(erro) {
-  throw new Error(erro.code, 'não há arquivo no caminho.');
+function tratarErro() {
+  throw new Error('não há arquivo no caminho');
 }
 
 async function pegaArquivo(caminhoDoArquivo) {
@@ -21,11 +21,8 @@ async function pegaArquivo(caminhoDoArquivo) {
     const texto = await fs.readFileSync(caminhoDoArquivo, encoding);
     return extraiLinks(texto);
   } catch (err) {
-    console.log(err)
-  } finally {
-    console.log('Operação concluída!')
+    tratarErro(err);
   }
-
 }
 
 export { pegaArquivo }
